@@ -1,29 +1,65 @@
 {
-  "name": "ssp-clients",
-  "version": "0.0.1",
-  "description": "simple server protocol",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "name": "rsp-client",
+  "version": "0.0.4",
+  "description": "Client Implementation of Runtime Server Protocol",
+  "main": "lib/main.js",
+  "types": "lib/main.d.ts",
   "scripts": {
-    "prepublish": "npm run build",
-    "build": "tsc",
-    "test": "mocha --reporter spec"
+    "prepare": "npm run build",
+    "build": "tslint -p tslint.json && tsc",
+    "test": "nyc mocha",
+    "coverage:upload": "codecov -f coverage/*.json",
+    "update-deps": "node_modules/.bin/ncu --upgrade --loglevel verbose --packageFile package.json && npm update"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "lib",
+      "test",
+      "coverage"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ],
+    "all": true
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sudhirverma/ssp-client.git"
+    "url": "git+https://github.com/redhat-developer/rsp-client.git"
   },
-  "author": "Sudhir Verma",
-  "license": "N/A",
+  "keywords": [
+    "runtime",
+    "server",
+    "adapters",
+    "protocol"
+  ],
+  "author": "Red Hat Developers",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sudhirverma/ssp-client/issues"
+    "url": "https://github.com/redhat-developer/rsp-client/issues"
   },
-  "homepage": "https://github.com/sudhirverma/ssp-client#readme",
+  "homepage": "https://github.com/redhat-developer/rsp-client#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.7.1",
+    "@types/sinon": "^5.0.1",
+    "@types/sinon-chai": "^3.2.0",
     "chai": "^4.1.2",
+    "codecov": "^3.0.4",
     "mocha": "^5.2.0",
-    "typescript": "^2.8.3"
-  },
-  "dependencies": {
+    "nyc": "^12.0.2",
+    "sinon": "^6.1.5",
+    "sinon-chai": "^3.2.0",
+    "source-map-support": "^0.5.8",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-no-unused-expression-chai": "^0.1.3",
+    "typescript": "^3.0.1",
+    "vscode-jsonrpc": "^3.6.2"
   }
 }
